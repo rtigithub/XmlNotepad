@@ -90,20 +90,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
       
 
-      <h2 id="custom-editors">Custom Editors</h2>
+      <h2 id="custom-editors">Custom Editors<a class="headerlink" href="#custom-editors" title="Permanent link">#</a></h2>
 <p>If an XML schema is provided for validation then that schema can also define custom editors on specific <code>&lt;xsd:simpleType&gt;</code> tags.</p>
 <p>A default custom editor is provided for the simpleTypes xsd:date xsd:dateTime and xsd:time. Any element or attribute of this type will be edited using the WinForms DateTimePicker, configured for the current system locale, for example:</p>
 <p><img alt="datetime" src="../../assets/images/datetime.jpg" /></p>
-<h2 id="custom-builders">Custom Builders</h2>
+<h2 id="custom-builders">Custom Builders<a class="headerlink" href="#custom-builders" title="Permanent link">#</a></h2>
 <p>Custom Builders provide a button that appears at the top of the intellisense list, when the user clicks on that button it invokes the builder to edit the value, which usually pops up a modal dialog.</p>
-<p>A custom builder for editing file names is provided and is automatically associated with the xsd:anyURI data type. You can associate this builder manually using the <code>vs:builder="XmlNotepad.UriBuilder"&gt;</code> attribute. When you edit an element of this type a button will appear titled &ldquo;Browse&hellip;&rdquo; at the top of the intellisense list and when you click on this button the WinForms OpenFileDialog will appear.</p>
+<p>A custom builder for editing file names is provided and is automatically associated with the xsd:anyURI data type. You can associate this builder manually using the <code>vs:builder="XmlNotepad.UriBuilder"&gt;</code> attribute. When you edit an element of this type a button will appear titled "Browse..." at the top of the intellisense list and when you click on this button the WinForms OpenFileDialog will appear.</p>
 <p>A custom builder for editing colors is provided. But since there is no standard color type defined in XSD, you must specify the vs:builder attribute as shown in the following example:</p>
 <pre><code class="language-xml">&lt;xsd:simpleType  name=&quot;color&quot; vs:builder=&quot;XmlNotepad.ColorBuilder&quot;&gt;
 </code></pre>
-<p>Where the &ldquo;vs&rdquo; prefix is bound to the following namespace: <code>xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"</code>.</p>
+<p>Where the "vs" prefix is bound to the following namespace: <code>xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"</code>.</p>
 <p>If you build your own custom editors you will also need to specify the <code>vs:assembly="FontBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=007b972e7cff2ded, processorArchitecture=MSIL"</code> attribute to point to your assembly. XML Notepad will then load your assembly so it can find the specified types.</p>
 <p><img alt="Colors" src="../../assets/images/colors.jpg" /></p>
-<p>When you edit an element of this type a button will appear titled &ldquo;Color Picker&rdquo; at the top of the intellisense list and when you click on this button the WinForms ColorDialog will appear. The resulting color will then be serialized back to the XML string using the <code>ColorConverter</code>.</p>
+<p>When you edit an element of this type a button will appear titled "Color Picker" at the top of the intellisense list and when you click on this button the WinForms ColorDialog will appear. The resulting color will then be serialized back to the XML string using the <code>ColorConverter</code>.</p>
 <p>You can implement your own builders by implementing <code>IXmlBuilder</code>and specifying your full class name in the <code>vs:builder</code> attribute.</p>
 <p>See also <a href="../schemas/">Schemas Dialog</a>.</p>
 

@@ -72,11 +72,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../help/ui/" class="btn btn-xs btn-default pull-right">
+      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../help/ui/" class="btn btn-xs btn-link">
+      <a href="../help/overview/" class="btn btn-xs btn-link">
         Overview
       </a>
     </div>
@@ -93,25 +93,25 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
       
 
-      <h1 id="about-xml-notepad">About XML Notepad</h1>
+      <h1 id="about-xml-notepad">About XML Notepad<a class="headerlink" href="#about-xml-notepad" title="Permanent link">#</a></h1>
 <p><a href="http://lovettsoftware.com/">Chris Lovett</a>, Microsoft</p>
 <p>I finally got around to fulfilling a promise I made to a friend at MSDN. Back in 1998, we shipped the first XML Notepad,
-written by Murray Low in C++. Later on it fell behind in support for XML standards and, because we didn&rsquo;t have time
+written by Murray Low in C++. Later on it fell behind in support for XML standards and, because we didn't have time
 to fix it, we pulled it off MSDN. But Murray apparently did such a nice job that MSDN was inundated with requests to
 put the notepad back up, so MSDN asked me for a replacement.</p>
 <p>I was working on System.Xml in C# in 1999, so I figured I could crank out a replacement using the .NET
-Framework pretty quickly. Well, the problem was it was one of those side projects on my &ldquo;one-day&rdquo; list — you know
+Framework pretty quickly. Well, the problem was it was one of those side projects on my "one-day" list — you know
 how that goes! Fortunately, a good friend of mine, Michael Corning, took interest in it, helped hold my feet to the
 fire, and also added some cool features himself. Dan Doris also took pity on me and helped identify some great bugs.
 So here we are, finally, with something that should be useful to those who want a quick way to view and edit XML
 documents.</p>
-<p>We&rsquo;ve had over 3 million downloads since then so I&rsquo;m happy I made the effort.
+<p>We've had over 3 million downloads since then so I'm happy I made the effort.
 Thanks to everyone who tried it out.</p>
 <p>For those who know the original version, the interface should look familiar: a tree view on the left synchronized with
 a node text view on the right and handy nudge toolbar buttons for quick movement of nodes up and down the tree:</p>
 <p><img alt="screen" src="../assets/images/screen.png" /></p>
-<p>Because it&rsquo;s been so long since the first version, I couldn&rsquo;t resist leveraging the cool stuff in System.Xml and so I added
-some bells and whistles that the original version didn&rsquo;t have, including:</p>
+<p>Because it's been so long since the first version, I couldn't resist leveraging the cool stuff in System.Xml and so I added
+some bells and whistles that the original version didn't have, including:</p>
 <ul>
 <li>Incremental search (CTRL+I) in both tree and text views, so that as you type it navigates to the most matched
 node.</li>
@@ -129,12 +129,12 @@ and attributes.</li>
 <li>HTML viewer for displaying XSLT transformation results.</li>
 <li>Built-in XML Diff tool.</li>
 </ul>
-<h2 id="design-and-implementation">Design and Implementation</h2>
-<p>In the github repo you&rsquo;ll find the core <code>XmlNotepad</code> dll project, an <code>Application</code> project that builds
+<h2 id="design-and-implementation">Design and Implementation<a class="headerlink" href="#design-and-implementation" title="Permanent link">#</a></h2>
+<p>In the github repo you'll find the core <code>XmlNotepad</code> dll project, an <code>Application</code> project that builds
 XmlNotepad.exe, the <code>XmlDiff</code> library projects used in the XML diff feature, a <code>XmlNotepadSetup</code> project for building the .msi
 installer, and the <code>UnitTests</code> project for testing XML Notepad.</p>
 <p>The following DGML diagram shows the relationships between the main UI classes. The main form contains all the UI
-elements from the TaskList to the main XmlTreeView with Resizers in between; it&rsquo;s the launching point for the dialogs
+elements from the TaskList to the main XmlTreeView with Resizers in between; it's the launching point for the dialogs
 such as FormSearch, FormSchemas, FormOption, and FormAbout.</p>
 <p><img alt="ui" src="../assets/images/ui.png" /></p>
 <p>The main tab control contains the XmlTreeView and the XsltViewer for showing XSL output. The XmlTreeView
@@ -145,7 +145,7 @@ find/replace functionality.</p>
 <p><img alt="find" src="../assets/images/find.png" /></p>
 <p>The Find dialog supports full text, regex, or XPath expressions and can filter by names or values. Here you see the
 XPath search, which also provides a table for entering namespace prefix mappings used in the query.</p>
-<h2 id="validation-intellisense-and-custom-editors">Validation, IntelliSense, and Custom Editors</h2>
+<h2 id="validation-intellisense-and-custom-editors">Validation, IntelliSense, and Custom Editors<a class="headerlink" href="#validation-intellisense-and-custom-editors" title="Permanent link">#</a></h2>
 <p>The biggest new feature is IntelliSense, which is driven by XML Schema information provided via the SchemaCache.
 For example, if your element or attribute is defined by an XSD simpleType and this simpleType contains a list of
 enumeration facets, then you will get a drop-down like this:</p>
@@ -161,10 +161,10 @@ System.Xml.Schema.XmlSchemaValidator, and uses that to provide IntelliSense.</p>
 <p>The TextEditorOverlay also supports custom editors like the DateTimeEditor or the UriBuilder or ColorBuilder. There
 are two types of custom editors: IXmlEditors, which are inline editors that replace the default TextBox, and
 IXmlBuilders, which are popup dialogs like the OpenFileDialog or ColorDialog. The type of editor is derived from the
-schema type information — &ldquo;xs:date&rdquo;, &ldquo;xs:time&rdquo;, &ldquo;xs:datetime&rdquo; results in the DateTimeEditor, and &ldquo;xs:anyURI&rdquo; results
-in the UriBuilder. You can also annotate the schema with a custom &ldquo;vs:builder&rdquo; attribute in the
-&ldquo;http://schemas.microsoft.com/Visual-Studio-IntelliSense&rdquo; namespace. See the Help content for more information.</p>
-<h2 id="infinite-undoredo">Infinite Undo/Redo</h2>
+schema type information — "xs:date", "xs:time", "xs:datetime" results in the DateTimeEditor, and "xs:anyURI" results
+in the UriBuilder. You can also annotate the schema with a custom "vs:builder" attribute in the
+"http://schemas.microsoft.com/Visual-Studio-IntelliSense" namespace. See the Help content for more information.</p>
+<h2 id="infinite-undoredo">Infinite Undo/Redo<a class="headerlink" href="#infinite-undoredo" title="Permanent link">#</a></h2>
 <p>To implement undo/redo I followed a common design pattern of Command objects with Undo and Redo methods.
 The UndoManager collects these in a list. Then the state of the UndoManager controls the enabled/disabled state of
 the Undo/Redo MenuItems. When the user selects the Undo menu item, the Undo method is called on the active
@@ -180,18 +180,18 @@ a list of smaller edit commands, and this CompoundCommand is put into the UndoMa
 <p>The PasteCommand is special because it takes random XML text off the clipboard and parses it in context of the
 currently selected element in the tree, inheriting the namespaces in scope. The helper class TreeData uses the special
 XmlTextReader constructor that takes an XmlParserContext as input.</p>
-<h2 id="unit-testing">Unit Testing</h2>
+<h2 id="unit-testing">Unit Testing<a class="headerlink" href="#unit-testing" title="Permanent link">#</a></h2>
 <p>I had to do a good job of testing the new XML Notepad, and I was looking for an excuse to use the new Visual Studio
  UnitTest projects. The UnitTest runs from the Test Explorer under the Test menu from within Visual Studio,
-launching XML Notepad and executing all the test methods I&rsquo;ve written.</p>
-<p>When the test completes, you can then right-click on the Test Results window and select &ldquo;Code Coverage Results&rdquo;.
+launching XML Notepad and executing all the test methods I've written.</p>
+<p>When the test completes, you can then right-click on the Test Results window and select "Code Coverage Results".
 This brings up a summary of how many blocks were covered in each function. You can double-click the row in the list
 to bring up a color-coded source code view showing exactly which code has been covered. This made it really easy
 for me to get the code coverage up to about 85 percent.
-The only trick is that you don&rsquo;t get code coverage when you run the tests under the debugger, and the UnitTest
-project creates a file next to your solution called &ldquo;localtestrun.testrunconfig&rdquo; and &ldquo;XmlNotepad.vsmdi,&rdquo; which you
+The only trick is that you don't get code coverage when you run the tests under the debugger, and the UnitTest
+project creates a file next to your solution called "localtestrun.testrunconfig" and "XmlNotepad.vsmdi," which you
 should not lose. If you do, then code coverage also will not work.</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">#</a></h2>
 <p>I hope you enjoy the all new XML Notepad. Feedback and suggestions are welcome,
 just use the github issues list.  Pull requests are also welcome, in fact,
 a number of good pull requests have already been merged.  Thanks to
@@ -208,11 +208,11 @@ all who are helping to make XML notepad a great tool!</p>
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../help/ui/" class="btn btn-xs btn-default pull-right">
+      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../help/ui/" class="btn btn-xs btn-link">
+      <a href="../help/overview/" class="btn btn-xs btn-link">
         Overview
       </a>
     </div>
