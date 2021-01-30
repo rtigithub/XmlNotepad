@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     
-    <link rel="canonical" href="https://microsoft.github.io/XmlNotepad/about/">
+    <link rel="canonical" href="https://microsoft.github.io/XmlNotepad/design/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>About - XmlNotepad</title>
+    <title>XML Notepad Design - XmlNotepad</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -35,7 +35,6 @@
         
         var pageToc = [
           {title: "XML Notepad Design", url: "#_top", children: [
-              {title: "Design and Implementation", url: "#design-and-implementation" },
               {title: "Validation, IntelliSense, and Custom Editors", url: "#validation-intellisense-and-custom-editors" },
               {title: "Infinite Undo/Redo", url: "#infinite-undoredo" },
               {title: "Unit Testing", url: "#unit-testing" },
@@ -64,72 +63,10 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <a name="_top"></a>
       
 
-    
-    
-      
-    
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../help/overview/" class="btn btn-xs btn-link">
-        Overview
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../install/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../install/" class="btn btn-xs btn-link">
-        Install
-      </a>
-    </div>
-    
-  </div>
-
       
 
       <h1 id="xml-notepad-design">XML Notepad Design<a class="headerlink" href="#xml-notepad-design" title="Permanent link">#</a></h1>
-<p><a href="http://lovettsoftware.com/">Chris Lovett</a>, Microsoft</p>
-<p>I finally got around to fulfilling a promise I made to a friend at MSDN. Back in 1998, we shipped the first XML Notepad,
-written by Murray Low in C++. Later on it fell behind in support for XML standards and, because we didn't have time
-to fix it, we pulled it off MSDN. But Murray apparently did such a nice job that MSDN was inundated with requests to
-put the notepad back up, so MSDN asked me for a replacement.</p>
-<p>I was working on System.Xml in C# in 1999, so I figured I could crank out a replacement using the .NET
-Framework pretty quickly. Well, the problem was it was one of those side projects on my "one-day" list — you know
-how that goes! Fortunately, a good friend of mine, Michael Corning, took interest in it, helped hold my feet to the
-fire, and also added some cool features himself. Dan Doris also took pity on me and helped identify some great bugs.
-So here we are, finally, with something that should be useful to those who want a quick way to view and edit XML
-documents.</p>
-<p>We've had over 3 million downloads since then so I'm happy I made the effort.
-Thanks to everyone who tried it out.</p>
-<p>For those who know the original version, the interface should look familiar: a tree view on the left synchronized with
-a node text view on the right and handy nudge toolbar buttons for quick movement of nodes up and down the tree:</p>
-<p><img alt="screen" src="../assets/images/screen.png" /></p>
-<p>Because it's been so long since the first version, I couldn't resist leveraging the cool stuff in System.Xml and so I added
-some bells and whistles that the original version didn't have, including:</p>
-<ul>
-<li>Incremental search (CTRL+I) in both tree and text views, so that as you type it navigates to the most matched
-node.</li>
-<li>Cut/copy/paste with full namespace support in a simple interoperable XML format.</li>
-<li>Drag/drop support for easy manipulation of the tree, even across different instances of XML Notepad and
-from the file system.</li>
-<li>Infinite undo/redo for all edit operations.</li>
-<li>In-place, pop-up, multi-line editing of large text node values and IntelliSense based on expected elements
-and attributes.</li>
-<li>Configurable fonts and colors via the options dialog.</li>
-<li>Full find/replace dialog with support for regex and XPath expressions.</li>
-<li>Good performance on large XML documents (loading a 3 MB document in about one second).</li>
-<li>Instant XML schema validation while you edit with errors and warnings shown in the task list window.</li>
-<li>Support for custom editors for date, dateTime, time, and color datatypes.</li>
-<li>HTML viewer for displaying XSLT transformation results.</li>
-<li>Built-in XML Diff tool.</li>
-</ul>
-<h2 id="design-and-implementation">Design and Implementation<a class="headerlink" href="#design-and-implementation" title="Permanent link">#</a></h2>
+<p>By <a href="http://lovettsoftware.com/">Chris Lovett</a>, Microsoft</p>
 <p>In the github repo you'll find the core <code>XmlNotepad</code> dll project, an <code>Application</code> project that builds
 XmlNotepad.exe, the <code>XmlDiff</code> library projects used in the XML diff feature, a <code>XmlNotepadSetup</code> project for building the .msi
 installer, and the <code>UnitTests</code> project for testing XML Notepad.</p>
@@ -199,33 +136,6 @@ all who are helping to make XML notepad a great tool!</p>
 
     <br>
       
-
-    
-    
-      
-    
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
-    
-    <div class="wm-article-nav pull-right">
-      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../help/overview/" class="btn btn-xs btn-link">
-        Overview
-      </a>
-    </div>
-    
-    <div class="wm-article-nav">
-      <a href="../install/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../install/" class="btn btn-xs btn-link">
-        Install
-      </a>
-    </div>
-    
-  </div>
 
       <br>
   </div>

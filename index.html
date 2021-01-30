@@ -37,6 +37,7 @@
         
         var pageToc = [
           {title: "XML Notepad", url: "#_top", children: [
+              {title: "Handy features include:", url: "#handy-features-include" },
           ]},
         ];
 
@@ -172,7 +173,17 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       <h1 id="xml-notepad">XML Notepad<a class="headerlink" href="#xml-notepad" title="Permanent link">#</a></h1>
 <p>XML Notepad provides a simple intuitive <a href="help/overview/">User Interface</a> for browsing and editing XML documents.</p>
 <p><a href="https://youtu.be/dtuSI4ZDZxg"><img alt="image" src="assets/images/help.png" /></a></p>
-<p>Handy features include:</p>
+<p>XML Notepad is the result of a promise Chris Lovett made to a friend at Microsoft. The original XML Notepad shipped in
+back in 1998, written by Murray Low in C++. Later on it fell behind in support for XML standards and, because we didn't
+have time to fix it, we pulled the downloader. But Murray apparently did such a nice job that MSDN was inundated with
+requests to put the notepad back up, so they asked for a replacement.</p>
+<p>Chris was working on System.Xml in C# in 1999, so he figured he could crank out a replacement using the .NET Framework
+pretty quickly. Well, the problem was it was one of those side projects on my "one-day" list — you know how that goes!
+Fortunately, another good friend, Michael Corning, took interest in it, helped hold his feet to the fire, and also added
+some cool features himself. Dan Doris also took pity on me and helped identify some great bugs. So here we are, a nifty
+tool that should be useful to those who want a quick way to view and edit XML documents.</p>
+<p>There have been over 3 million downloads since then - so thanks to everyone who tried it out!  </p>
+<h3 id="handy-features-include">Handy features include:<a class="headerlink" href="#handy-features-include" title="Permanent link">#</a></h3>
 <ul>
 <li>Ability to load .csv and .htm files converting them to XML.</li>
 <li>Tree View synchronized with Node Text View for quick editing of node names and values.</li>
@@ -191,13 +202,15 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Inplace HTML viewer for processing <code>&lt;?xml-stylesheets</code> instructions.</li>
 <li>Built-in XML Diff tool.</li>
 <li>Support for XInclude.</li>
+<li>Handy "XML statistics" tool to summarize info about your XML documents.</li>
 <li>Dynamic help from XSD annotations.</li>
 <li>Goto definition to navigate includes and XSD schema information.</li>
-<li>Vibrant community with many <a href="http://www.lovettsoftware.com/downloads/XmlNotepad/Updates.xml">updates and bug fixes</a>.</li>
+<li>Vibrant community with many <a href="help/updates/">updates and bug fixes</a>.</li>
 </ul>
-<p>See <a href="about/">XML Notepad Design </a> for information about how this application is built.</p>
 <p>This source code is available
-The source code is available at <a href="https://github.com/microsoft/XmlNotepad">https://github.com/microsoft/XmlNotepad</a> and it has  adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>.</p>
+The source code is available at <a href="https://github.com/microsoft/XmlNotepad">https://github.com/microsoft/XmlNotepad</a>.</p>
+<p>Please provide feedback or any issues you have using the <a href="https://github.com/microsoft/XmlNotepad/issues">XML Notepad Github issues</a> list.</p>
+<p>See <a href="dev/">development</a> information on how to build XML Notepad from source.</p>
 <p>For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</p>
 
     <br>
@@ -263,5 +276,5 @@ The source code is available at <a href="https://github.com/microsoft/XmlNotepad
 </html>
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-30 00:33:06.910307+00:00
+Build Date UTC : 2021-01-30 02:55:27.009300+00:00
 -->
