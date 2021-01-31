@@ -11,7 +11,7 @@
     <link rel="canonical" href="https://microsoft.github.io/XmlNotepad/dev/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Dev - XmlNotepad</title>
+    <title>Development - XmlNotepad</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -63,19 +63,49 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     <a name="_top"></a>
       
 
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../help/overview/" class="btn btn-xs btn-link">
+        Overview
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../install/" class="btn btn-xs btn-link">
+        Install
+      </a>
+    </div>
+    
+  </div>
+
       
 
       <h2 id="xmlnotepad-development">XmlNotepad Development<a class="headerlink" href="#xmlnotepad-development" title="Permanent link">#</a></h2>
 <p>You can build and test XML Notepad using <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2019</a>. It uses
 .NET frameworks, so be sure to install the ".NET desktop development" feature when using the Visual Studio Installer.
 XML Notepad targets .NET Framework version 4.7.2 which is the default target for VS 2019.</p>
-<p>XML Notepad uses the <a href="https://wixtoolset.org/">WIX Toolset</a> to build a standalone windows .msi installer.
-To build that setup you will need to install the WIX toolset then the <a href="https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension">Wix Toolset Visual Studio 2019 Extension</a>.</p>
+<p>XML Notepad uses the <a href="https://wixtoolset.org/">WIX Toolset</a> to build a standalone windows .msi installer. To build that
+setup you will need to install the WIX toolset then the <a href="https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension">Wix Toolset Visual Studio 2019
+Extension</a>.</p>
 <h3 id="build-the-code">Build the code<a class="headerlink" href="#build-the-code" title="Permanent link">#</a></h3>
-<p>After cloning the repo:
-- Load <code>src/XmlNotepad.sln</code> into VS 2019.
-- Select Debug or Release and target "Any CPU".
-- Run Build Solution.</p>
+<p>After cloning the repo:</p>
+<ul>
+<li>Load <code>src/XmlNotepad.sln</code> into VS 2019.</li>
+<li>Select Debug or Release and target "Any CPU".</li>
+<li>Run Build Solution.</li>
+</ul>
 <h3 id="debug-the-app">Debug the app<a class="headerlink" href="#debug-the-app" title="Permanent link">#</a></h3>
 <ul>
 <li>Right click the <code>Application</code> project and slelect <code>Set as Startup Project</code>.</li>
@@ -83,17 +113,44 @@ To build that setup you will need to install the WIX toolset then the <a href="h
 <li>Press F5 to start debugging.</li>
 </ul>
 <h3 id="test-the-app">Test the app<a class="headerlink" href="#test-the-app" title="Permanent link">#</a></h3>
-<p>After building the app select <code>Run all tests</code> from the Visual Studio <code>Test</code> menu.</p>
+<p>After building the app:</p>
 <ul>
 <li>Right click the <code>UnitTests</code> project and select <code>Run tests</code>.</li>
 </ul>
 <p>This is a GUI test, so do not move your mouse or type on your keyboard or let your
 screen lock until this test is completed.  Total test run time is about 12 minutes.</p>
 <h3 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h3>
-<p>See <a href="../about/">XML Notepad Design </a> for information about how this application is built.</p>
+<p>See <a href="../help/design/">XML Notepad Design </a> for more detailed information about how this application is designed.</p>
 
     <br>
       
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../help/overview/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../help/overview/" class="btn btn-xs btn-link">
+        Overview
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../install/" class="btn btn-xs btn-link">
+        Install
+      </a>
+    </div>
+    
+  </div>
 
       <br>
   </div>
