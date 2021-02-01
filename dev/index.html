@@ -38,6 +38,10 @@
               {title: "Build the code", url: "#build-the-code" },
               {title: "Debug the app", url: "#debug-the-app" },
               {title: "Test the app", url: "#test-the-app" },
+              {title: "BuildTasks", url: "#buildtasks" },
+              {title: "Publish the ClickOnce installer", url: "#publish-the-clickonce-installer" },
+              {title: "Build the setup .msi installer", url: "#build-the-setup-msi-installer" },
+              {title: "Build the winget setup package", url: "#build-the-winget-setup-package" },
               {title: "Design", url: "#design" },
           ]},
         ];
@@ -96,9 +100,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>You can build and test XML Notepad using <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2019</a>. It uses
 .NET frameworks, so be sure to install the ".NET desktop development" feature when using the Visual Studio Installer.
 XML Notepad targets .NET Framework version 4.7.2 which is the default target for VS 2019.</p>
-<p>XML Notepad uses the <a href="https://wixtoolset.org/">WIX Toolset</a> to build a standalone windows .msi installer. To build that
-setup you will need to install the WIX toolset then the <a href="https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension">Wix Toolset Visual Studio 2019
-Extension</a>.</p>
 <h3 id="build-the-code">Build the code<a class="headerlink" href="#build-the-code" title="Permanent link">#</a></h3>
 <p>After cloning the repo:</p>
 <ul>
@@ -108,7 +109,7 @@ Extension</a>.</p>
 </ul>
 <h3 id="debug-the-app">Debug the app<a class="headerlink" href="#debug-the-app" title="Permanent link">#</a></h3>
 <ul>
-<li>Right click the <code>Application</code> project and slelect <code>Set as Startup Project</code>.</li>
+<li>Right click the <code>Application</code> project and select <code>Set as Startup Project</code>.</li>
 <li>Select Debug configuration.</li>
 <li>Press F5 to start debugging.</li>
 </ul>
@@ -119,6 +120,44 @@ Extension</a>.</p>
 </ul>
 <p>This is a GUI test, so do not move your mouse or type on your keyboard or let your
 screen lock until this test is completed.  Total test run time is about 12 minutes.</p>
+<h3 id="buildtasks">BuildTasks<a class="headerlink" href="#buildtasks" title="Permanent link">#</a></h3>
+<p>The <code>BuildTasks</code> project contains special MSBuild task that is used to synchronize the <code>Versions.cs</code> information
+across multiple places so you can edit the version number in one place and this is then propagated to:</p>
+<ol>
+<li>The WIX based setup file <code>Product.wxs</code>.</li>
+<li>The windows package manifest file <code>Package.appxmanifest</code>.</li>
+<li>The updates.xml file.</li>
+<li>The readme.htm file.</li>
+</ol>
+<p><strong>Note</strong>: if you change the <code>SyncVersions.cs</code> code, and build a new DLL you will need to close VS, and copy the
+resulting <code>BuildTasks\bin\Debug\XmlNotepadBuildTasks.dll</code> to <code>BuildTasks\XmlNotepadBuildTasks.dll</code>, then reload the
+XmlNotepad.sln. This is done this way because Visual Studio will lock this file after doing a build, so you wouldn't be
+able to compile the new version.</p>
+<h3 id="publish-the-clickonce-installer">Publish the ClickOnce installer<a class="headerlink" href="#publish-the-clickonce-installer" title="Permanent link">#</a></h3>
+<p>Open the <code>Application</code> project properties and you will see a Publish option there which is currently configured to 
+upload the installer using FTP to the <code>ftp://lovettsoftware.com/lovettsoftware.com/Downloads/XmlNotepad/</code> location.
+This is only something that can be done by the current author.  This setup is also only performed on strongly
+signed bits using a certificate belonging to the author.  This certificate is specified using environment variable
+<code>MYKEYFILE</code>, but you can build, debug and test XML Notepad without this environment variable set.</p>
+<p>This setup provides the ClickOnce installed version of XML Notepad installable from <a href="http://lovettsoftware.com/downloads/xmlnotepad/XmlNotepad.application">lovettsoftware</a>.  This is the most convenient installer since it is
+a single click and also provide auto-updating whenever a new version is published.</p>
+<h3 id="build-the-setup-msi-installer">Build the setup .msi installer<a class="headerlink" href="#build-the-setup-msi-installer" title="Permanent link">#</a></h3>
+<p>XML Notepad uses the <a href="https://wixtoolset.org/">WIX Toolset</a> to build a standalone windows .msi installer. To build that
+setup you will need to install the WIX toolset then the <a href="https://marketplace.visualstudio.com/items?itemName=WixToolset.WixToolsetVisualStudio2019Extension">Wix Toolset Visual Studio 2019
+Extension</a>.</p>
+<p>Then right click the <code>XmlNotepadSetup</code> project and select "build".  This will produce an .msi installer in the
+XmlNotepadSetup\bin\release folder.  There is also a <code>sign.cmd</code> script invoked by this build that will try and sign the
+resulting .msi using the certificate installed by the author.  This step will only work for the author who owns the
+certificate.</p>
+<p>This <code>msi</code> installer gives folks the option to install XML Notepad on machines that are isolated from the internet and
+there are quite a few customers who have requested this, which is why it exists.</p>
+<h3 id="build-the-winget-setup-package">Build the winget setup package<a class="headerlink" href="#build-the-winget-setup-package" title="Permanent link">#</a></h3>
+<p>The <code>winget</code> setup package is built by the <code>XmlNotepadPackage</code> project.  Right click this project in the Solution
+Explorer and select <code>Publish</code> and <code>Create App Packages</code>.  Choose Sideloading, and the package files will be written to
+the XmlNotepadPackage\AppPackages folder.  These can then be uploaded to the server hosting these packages and you can
+then update the manifest in
+<a href="https://github.com/microsoft/winget-pkgs/tree/master/manifests/Microsoft/XMLNotepad">winget-pkgs</a>.  </p>
+<p>This package provides the <code>winget install xmlnotepad</code> setup option.</p>
 <h3 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h3>
 <p>See <a href="../help/design/">XML Notepad Design </a> for more detailed information about how this application is designed.</p>
 
