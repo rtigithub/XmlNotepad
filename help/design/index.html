@@ -85,7 +85,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       <h1 id="xml-notepad-design">XML Notepad Design<a class="headerlink" href="#xml-notepad-design" title="Permanent link">#</a></h1>
 <p>By <a href="http://lovettsoftware.com/">Chris Lovett</a>, Microsoft</p>
 <p>In the github repo you'll find the core <code>XmlNotepad</code> dll project, an <code>Application</code> project that builds
-XmlNotepad.exe, the <code>XmlDiff</code> library projects used in the XML diff feature, a <code>XmlNotepadSetup</code> project for building the .msi
+XmlNotepad.exe, and some setup projects like <code>XmlNotepadSetup</code> which builds the .msi
 installer, and the <code>UnitTests</code> project for testing XML Notepad.</p>
 <p>The following DGML diagram shows the relationships between the main UI classes. The main form contains all the UI
 elements from the TaskList to the main XmlTreeView with Resizers in between; it's the launching point for the dialogs
@@ -96,9 +96,8 @@ contains a TreeView on the left and a NodeTextView on the right and coordinates 
 Both the TreeView and NodeTextView provide the same IntelliSense editing functionality using a TextEditorOverlay
 component. The XmlTreeView implements IFindTarget, which is used by the Find dialog (FormSearch) to implement
 find/replace functionality.</p>
-<p><img alt="find" src="../../assets/images/find.png" /></p>
-<p>The Find dialog supports full text, regex, or XPath expressions and can filter by names or values. Here you see the
-XPath search, which also provides a table for entering namespace prefix mappings used in the query.</p>
+<p><img alt="find" src="../../assets/images/ifindtarget.png" /></p>
+<p>The Find dialog supports full text, regex, or XPath expressions and can filter by names or values.</p>
 <h2 id="validation-intellisense-and-custom-editors">Validation, IntelliSense, and Custom Editors<a class="headerlink" href="#validation-intellisense-and-custom-editors" title="Permanent link">#</a></h2>
 <p>The biggest new feature is IntelliSense, which is driven by XML Schema information provided via the SchemaCache.
 For example, if your element or attribute is defined by an XSD simpleType and this simpleType contains a list of
