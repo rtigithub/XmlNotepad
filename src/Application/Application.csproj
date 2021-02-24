@@ -23,7 +23,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://lovettsoftware.com/lovettsoftware.com/Downloads/XmlNotepad/</PublishUrl>
+    <PublishUrl>d:\git\lovettchris\XmlNotepad\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -33,15 +33,16 @@
     <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://lovettsoftware.com/downloads/xmlnotepad/</InstallUrl>
+    <InstallUrl>https://lovettsoftwarestorage.blob.core.windows.net/downloads/XmlNotepad/</InstallUrl>
+    <UpdateUrl>https://lovettsoftwarestorage.blob.core.windows.net/downloads/XmlNotepad/</UpdateUrl>
     <SupportUrl>https://github.com/Microsoft/XmlNotepad</SupportUrl>
     <ProductName>XML Notepad</ProductName>
     <PublisherName>Chris Lovett</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>readme.htm</WebPage>
     <DisallowUrlActivation>true</DisallowUrlActivation>
-    <ApplicationRevision>24</ApplicationRevision>
-    <ApplicationVersion>2.8.0.24</ApplicationVersion>
+    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationVersion>2.8.0.25</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
