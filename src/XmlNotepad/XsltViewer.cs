@@ -477,7 +477,7 @@ namespace XmlNotepad {
             ViewSource,
             Options
         }
-	
+     
         private mshtml.HTMLDocument GetDocument() {
             try {
                 mshtml.HTMLDocument htm = (mshtml.HTMLDocument)this.WebBrowser1.Document.DomDocument;
