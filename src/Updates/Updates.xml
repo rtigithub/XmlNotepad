@@ -5,9 +5,13 @@
     <title>Microsoft XML Notepad</title>
     <location>https://lovettsoftwarestorage.blob.core.windows.net/downloads/XmlNotepad/Updates.xml</location>
     <download>https://lovettsoftwarestorage.blob.core.windows.net/downloads/XmlNotepad/readme.htm</download>
+    <installer>https://microsoft.github.io/XmlNotepad/install/</installer>
     <frequency>1.00:00:00</frequency>
   </application>
-  <version number="2.8.0.25">
+  <version number="2.8.0.27">
+    <feature>Minor fixes to XML stats output got github issues #76 and #77.</feature>
+  </version>
+  <version number="2.8.0.26">
     <feature>Provide a way to disable google analytics before installing XML Notepad.</feature>
   </version>
   <version number="2.8.0.24">

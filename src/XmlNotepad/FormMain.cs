@@ -46,6 +46,7 @@ namespace XmlNotepad {
         bool helpAvailableHint = true;
         Analytics analytics;
         Updater updater;
+        DelayedActions delayedActions = new DelayedActions();
         System.CodeDom.Compiler.TempFileCollection tempFiles = new System.CodeDom.Compiler.TempFileCollection();
         private ContextMenuStrip contextMenu1;
         private ToolStripSeparator ctxMenuItem20;
@@ -207,7 +208,6 @@ namespace XmlNotepad {
         private ToolStripMenuItem changeToCDATAContextMenuItem;
         private ToolStripMenuItem changeToCommentContextMenuItem;
         private ToolStripMenuItem changeToProcessingInstructionContextMenuItem;
-        private ToolStripMenuItem changeToElementContextMenuItem;
         private ToolStripMenuItem incrementalSearchToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem1;
         private ToolStripMenuItem renameToolStripMenuItem;
@@ -221,6 +221,7 @@ namespace XmlNotepad {
         private ToolStripMenuItem statsToolStripMenuItem;
         private ToolStripMenuItem checkUpdatesToolStripMenuItem;
         private ToolStripMenuItem sampleToolStripMenuItem;
+        private ToolStripMenuItem changeToElementContextMenuItem;
         private string redoLabel;
 
 
@@ -553,27 +554,49 @@ namespace XmlNotepad {
         protected override void OnLoad(EventArgs e) {
             this.updater = new Updater(this.settings);
             this.updater.Title = this.Caption;
-            this.updater.UpdateRequired += new EventHandler(OnUpdateRequired);
+            this.updater.UpdateRequired += new EventHandler<bool>(OnUpdateRequired);
             LoadConfig();
             this.xmlTreeView1.OnLoaded();
             base.OnLoad(e);
         }
 
-        void OnUpdateRequired(object sender, EventArgs e) {
+        void OnUpdateRequired(object sender, bool updateAvailable) {
             ISynchronizeInvoke si = (ISynchronizeInvoke)this;
             if (si.InvokeRequired) {
                 // get on the right thread.
-                si.Invoke(new EventHandler(OnUpdateRequired), new object[1] { e });
+                si.Invoke(new EventHandler<bool>(OnUpdateRequired), new object[2] { sender, updateAvailable } );
                 return;
             }
+            this.toolStripMenuItemUpdate.Tag = updateAvailable;
+            if (updateAvailable)
+            {
+                this.toolStripMenuItemUpdate.Text = SR.UpdateAvailableCaption;
+                this.toolStripMenuItemUpdate.ToolTipText = string.Format(SR.UpdateAvailableTooltip, this.caption, updater.Version) + "\r\n" +
+                    SR.ShowInstallPage;
+                this.menuStrip1.ShowItemToolTips = true;
+            } 
+            else
+            {
+                this.toolStripMenuItemUpdate.Text = SR.UpToDate;
+                this.toolStripMenuItemUpdate.ToolTipText = string.Format(SR.UpToDateTooltip, updater.Version) + "\r\n" +
+                    SR.ShowUpdateHistory;
+                this.menuStrip1.ShowItemToolTips = true;
+            }
             this.toolStripMenuItemUpdate.Visible = true;
+            this.delayedActions.StartDelayedAction(HideUpdateButtonAction, () => {
+                this.toolStripMenuItemUpdate.Visible = false;
+            }, TimeSpan.FromSeconds(30));
         }
         
-        void toolStripMenuItemUpdate_Click(object sender, EventArgs e) {         
-            if (MessageBox.Show(string.Format(SR.UpdateAvailable, this.caption, updater.Version), 
-                SR.UpdateAvailableCaption, MessageBoxButtons.YesNo,
-                MessageBoxIcon.Exclamation) == DialogResult.Yes) {
-                Utilities.OpenUrl(this.Handle, this.updater.DownloadPage);
+        void toolStripMenuItemUpdate_Click(object sender, EventArgs e) 
+        {       
+            if (this.toolStripMenuItemUpdate.Tag is bool updateAvailable && updateAvailable)
+            {
+                Utilities.OpenUrl(this.Handle, this.updater.InstallerLocation);
+            }
+            else if (this.updater.UpdateLocation != null)
+            {
+                Utilities.OpenUrl(this.Handle, this.updater.UpdateLocation.ToString());
             }
         }
 
@@ -601,6 +624,7 @@ namespace XmlNotepad {
             if (this.updater != null) {
                 this.updater.Dispose();
             }
+            this.delayedActions.Close();
         }
 
         private void OnMenuStripSizeChanged(object sender, EventArgs e)
@@ -739,6 +763,7 @@ namespace XmlNotepad {
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.changeToElementContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.statusBarPanelMessage = new System.Windows.Forms.StatusBarPanel();
             this.statusBarPanelBusy = new System.Windows.Forms.StatusBarPanel();
@@ -910,7 +935,6 @@ namespace XmlNotepad {
             this.tabPageDynamicHelp = new XmlNotepad.NoBorderTabPage();
             this.taskList = new XmlNotepad.TaskList();
             this.dynamicHelpViewer = new XmlNotepad.XsltViewer();
-            changeToElementContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanelMessage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusBarPanelBusy)).BeginInit();
             this.contextMenu1.SuspendLayout();
@@ -920,6 +944,12 @@ namespace XmlNotepad {
             this.tabPageTreeView.SuspendLayout();
             this.tabPageHtmlView.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // changeToElementContextMenuItem
+            // 
+            this.changeToElementContextMenuItem.Name = "changeToElementContextMenuItem";
+            resources.ApplyResources(this.changeToElementContextMenuItem, "changeToElementContextMenuItem");
+            this.changeToElementContextMenuItem.Click += new System.EventHandler(this.changeToElementContextMenuItem_Click);
             // 
             // statusBar1
             // 
@@ -1015,7 +1045,7 @@ namespace XmlNotepad {
             // changeToContextMenuItem
             // 
             this.changeToContextMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            changeToElementContextMenuItem,
+            this.changeToElementContextMenuItem,
             this.changeToAttributeContextMenuItem,
             this.changeToTextContextMenuItem,
             this.changeToCDATAContextMenuItem,
@@ -1023,12 +1053,6 @@ namespace XmlNotepad {
             this.changeToProcessingInstructionContextMenuItem});
             this.changeToContextMenuItem.Name = "changeToContextMenuItem";
             resources.ApplyResources(this.changeToContextMenuItem, "changeToContextMenuItem");
-            // 
-            // changeToElementContextMenuItem
-            // 
-            changeToElementContextMenuItem.Name = "changeToElementContextMenuItem";
-            resources.ApplyResources(changeToElementContextMenuItem, "changeToElementContextMenuItem");
-            changeToElementContextMenuItem.Click += new System.EventHandler(this.changeToElementContextMenuItem_Click);
             // 
             // changeToAttributeContextMenuItem
             // 
@@ -2144,8 +2168,11 @@ namespace XmlNotepad {
 
         }
 
+        const string HideUpdateButtonAction = "HideUpdateButton";
+
         private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.delayedActions.CancelDelayedAction(HideUpdateButtonAction);
             this.updater.CheckNow();
         }
 
@@ -2453,6 +2480,7 @@ namespace XmlNotepad {
                     ShowStatus(SR.SavedStatus);
                     this.settings["FileName"] = model.Location;
                     EnableFileMenu();
+                    this.recentFiles.AddRecentFile(model.Location);
                 }
             } catch (Exception e){
                 MessageBox.Show(this, e.Message, SR.SaveErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);                
@@ -3371,7 +3399,9 @@ namespace XmlNotepad {
             SelectTreeView();
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = SR.SaveAsFilter;
-            while (ofd.ShowDialog(this) == DialogResult.OK) {
+            bool retry = true;
+            while (retry && ofd.ShowDialog(this) == DialogResult.OK) 
+            {
                 string secondFile = ofd.FileName;
                 if (secondFile.ToUpperInvariant() == this.model.FileName.ToUpperInvariant())
                 {
@@ -3379,6 +3409,7 @@ namespace XmlNotepad {
                 }
                 else
                 {
+                    retry = false;
                     try
                     {
                         DoCompare(secondFile);
@@ -3421,9 +3452,9 @@ namespace XmlNotepad {
 
             resultHtml.WriteLine(string.Format(SR.XmlDiffBody,
                     System.IO.Path.GetDirectoryName(sourceXmlFile),
-                    System.IO.Path.GetFileName(sourceXmlFile),
+                    sourceXmlFile,
                     System.IO.Path.GetDirectoryName(changedXmlFile),
-                    System.IO.Path.GetFileName(changedXmlFile)
+                    changedXmlFile
             ));
 
         }
@@ -3479,10 +3510,19 @@ namespace XmlNotepad {
             this.SaveIfDirty(false);
             string filename = this.model.FileName;
 
-            XmlDocument original = this.model.Document;
-            XmlDocument doc = new XmlDocument();
-
+            // load file from disk, as saved doc can be slightly different
+            // (e.g. it might now have an XML declaration).  This ensures we
+            // are diffing the exact same doc as we see loaded below on the
+            // diffView.Load call.
+            XmlDocument original = new XmlDocument();
             XmlReaderSettings settings = model.GetReaderSettings();
+            using (XmlReader reader = XmlReader.Create(filename, settings))
+            {
+                original.Load(reader);
+            }
+
+            XmlDocument doc = new XmlDocument();
+            settings = model.GetReaderSettings();
             using (XmlReader reader = XmlReader.Create(changed, settings)) {
                 doc.Load(reader);
             }
@@ -3704,6 +3744,10 @@ namespace XmlNotepad {
 
         private void statsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (this.model == null || string.IsNullOrEmpty(this.model.FileName))
+            {
+                return;
+            }
             this.xmlTreeView1.Commit();
             this.SaveIfDirty(false);
             
@@ -3729,10 +3773,14 @@ namespace XmlNotepad {
             // now we can use "xmlstats -f names.txt" to generate the stats in a console window, this
             // way the user learns they can use xmlstats from the command line.
             string tempFile = Path.Combine(scratch, "stats.cmd");
-            using (TextWriter cmdFile = new StreamWriter(tempFile, false, Encoding.UTF8))
+            using (TextWriter cmdFile = new StreamWriter(tempFile, false, Encoding.Default))
             {
-                cmdFile.WriteLine("echo on");
+                cmdFile.WriteLine("@echo off");
+                cmdFile.WriteLine("echo XML stats for: " + this.model.FileName);
+                cmdFile.WriteLine("echo ---------------" + new string('-', this.model.FileName.Length));
                 cmdFile.WriteLine("xmlstats -f \"{0}\"", fileNameFile);
+                cmdFile.WriteLine("echo ---------------" + new string('-', this.model.FileName.Length));
+                cmdFile.WriteLine("echo You can explore other options using : xmlstats -? " + this.model.FileName);
             }
 
             string cmd = Path.Combine(Environment.GetEnvironmentVariable("WINDIR"), "System32", "cmd.exe");

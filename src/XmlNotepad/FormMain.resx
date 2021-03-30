@@ -306,18 +306,12 @@
   <data name="duplicateToolStripMenuItem1.Text" xml:space="preserve">
     <value>Du&amp;plicate</value>
   </data>
-  <metadata name="changeToElementContextMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="changeToContextMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 22</value>
   </data>
   <data name="changeToContextMenuItem.Text" xml:space="preserve">
     <value>C&amp;hange To</value>
   </data>
-  <metadata name="changeToElementContextMenuItem.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>False</value>
-  </metadata>
   <data name="changeToElementContextMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -842,7 +836,7 @@
     <value>Update Available</value>
   </data>
   <data name="toolStripMenuItemUpdate.ToolTipText" xml:space="preserve">
-    <value>Click here to read message about software update.</value>
+    <value>Click here to read message about software updates.</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

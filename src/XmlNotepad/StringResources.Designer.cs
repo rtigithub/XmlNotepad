@@ -1274,6 +1274,24 @@ namespace XmlNotepad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here to open the installer web page..
+        /// </summary>
+        internal static string ShowInstallPage {
+            get {
+                return ResourceManager.GetString("ShowInstallPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to visit the update history..
+        /// </summary>
+        internal static string ShowUpdateHistory {
+            get {
+                return ResourceManager.GetString("ShowUpdateHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System Exception of type {0}
         ///{1}.
         /// </summary>
@@ -1410,21 +1428,20 @@ namespace XmlNotepad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Version {1} of {0} is now available.  
-        ///Do you want to visit the web page that describes this update?.
-        /// </summary>
-        internal static string UpdateAvailable {
-            get {
-                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Update Available.
         /// </summary>
         internal static string UpdateAvailableCaption {
             get {
                 return ResourceManager.GetString("UpdateAvailableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {1} of {0} is now available. .
+        /// </summary>
+        internal static string UpdateAvailableTooltip {
+            get {
+                return ResourceManager.GetString("UpdateAvailableTooltip", resourceCulture);
             }
         }
         
@@ -1456,6 +1473,24 @@ namespace XmlNotepad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Up to date.
+        /// </summary>
+        internal static string UpToDate {
+            get {
+                return ResourceManager.GetString("UpToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the latest version: {0}.
+        /// </summary>
+        internal static string UpToDateTooltip {
+            get {
+                return ResourceManager.GetString("UpToDateTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
         internal static string UriBrowseLabel {
@@ -1466,7 +1501,7 @@ namespace XmlNotepad {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;td title=&apos;{0}&apos;&gt;&lt;b&gt; File in editor : {1}&lt;/b&gt;&lt;/td&gt;
-        ///  &lt;td title=&apos;{2}&apos;&gt;&lt;b&gt; File to compare : {2}&lt;/b&gt;&lt;/td&gt;
+        ///  &lt;td title=&apos;{2}&apos;&gt;&lt;b&gt; File to compare : {3}&lt;/b&gt;&lt;/td&gt;
         ///&lt;/tr&gt;.
         /// </summary>
         internal static string XmlDiffBody {

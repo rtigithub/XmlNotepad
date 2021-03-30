@@ -109,6 +109,7 @@
     <Compile Include="Commands.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DelayedAction.cs" />
     <Compile Include="DomLoader.cs" />
     <Compile Include="EditableView.cs" />
     <Compile Include="FileAssociation.cs" />
